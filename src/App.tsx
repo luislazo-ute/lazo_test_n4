@@ -31,11 +31,11 @@ export default function App() {
           <Button component={NavLink} to="/productos" sx={linkBtnSx}>
             Productos
           </Button>
-          <Button component={NavLink} to="/suma" sx={linkBtnSx}>
-            Suma
+          <Button component={NavLink} to="/nuevo producto" sx={linkBtnSx}>
+            Nuevo Porducto
           </Button>
-          <Button component={NavLink} to="/multiplica" sx={linkBtnSx}>
-            Multiplica
+          <Button component={NavLink} to="/calculos" sx={linkBtnSx}>
+            Calculos
           </Button>
           <Button component={NavLink} to="/acerca" sx={linkBtnSx}>
             Acerca de
@@ -49,8 +49,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/productos" element={<ProductsPage />} />
-          <Route path="/suma" element={<SumPage />} />
-          <Route path="/multiplica" element={<MultiplyPage />} />
+          <Route path="/nuevo producto" element={<SumPage />} />
+          <Route path="/calculos" element={<MultiplyPage />} />
           <Route path="/acerca" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

@@ -1,37 +1,116 @@
-import { useMemo, useState } from "react";
-import { Paper, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import {
+  Typography,
+  TextField,
+  Button,
+  Paper,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Alert,
+} from "@mui/material";
 
-export default function SumPage() {
-  const [a, setA] = useState(0);
-  const [b, setB] = useState(0);
+interface Producto {
+  id: number;
+  nombre: string;
+  precio: number;
+  stock: number;
+}
 
-  const result = useMemo(() => a + b, [a, b]);
+function SumPage() {
+  const [nombre, setNombre] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [stock, setStock] = useState("");
+  const [productos, setProductos] = useState<Producto[]>([]);
+  const [mensaje, setMensaje] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const nuevoProducto: Producto = {
+      id: Date.now(),
+      nombre,
+      precio: Number(precio),
+      stock: Number(stock),
+    };
+
+    setProductos([...productos, nuevoProducto]);
+    setMensaje("Producto agregado correctamente");
+
+    setNombre("");
+    setPrecio("");
+    setStock("");
+  };
 
   return (
-    <Paper sx={{ p: 3, borderRadius: 3 }}>
-      <Typography variant="h5" fontWeight={900} gutterBottom>
-        Suma (a + b)
-      </Typography>
+    
+      <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+        <Typography variant="h5" gutterBottom align="left">
+          Registrar Producto
+        </Typography>
 
-      <TextField
-        label="A"
-        type="number"
-        value={a}
-        onChange={(e) => setA(Number(e.target.value))}
-        sx={{ mr: 2, mb: 2 }}
-      />
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
+            <h4>Nombre:</h4>
+          <TextField
+            fullWidth
+            margin="normal"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            required
+          />
+            <h4>Precio:</h4>
+          <TextField
+            type="number"
+            fullWidth
+            margin="normal"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
+            required
+          />
+            <h4>Stock:</h4>
+          <TextField
+            type="number"
+            fullWidth
+            margin="normal"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+            required
+          />
 
-      <TextField
-        label="B"
-        type="number"
-        value={b}
-        onChange={(e) => setB(Number(e.target.value))}
-        sx={{ mb: 2 }}
-      />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+          >
+            Guardar Producto
+          </Button>
+        </Box>
 
-      <Typography sx={{ mt: 1 }}>
-        Resultado: <strong>{result}</strong>
-      </Typography>
-    </Paper>
+        {mensaje && (
+          <Alert severity="success" sx={{ mt: 2 }}>
+            {mensaje}
+          </Alert>
+        )}
+
+        <Typography variant="h6" sx={{ mt: 3 }}>
+          Agrega los campos correctamente
+        </Typography>
+
+        <List>
+          {productos.map((p) => (
+            <ListItem key={p.id} divider>
+              <ListItemText
+                primary={p.nombre}
+                secondary={`Precio: $${p.precio} | Stock: ${p.stock}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+ 
   );
 }
+
+export default SumPage;

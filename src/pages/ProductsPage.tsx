@@ -81,9 +81,9 @@ export default function ProductsPage() {
                 <TableCell>{p?.id ?? "-"}</TableCell>
                 <TableCell>{p?.name ?? "-"}</TableCell>
                 <TableCell align="right">{p?.ki ?? "-"}</TableCell>
-                <TableCell align="right">{p?.maxki ?? "-"}</TableCell>
+                <TableCell align="right">{p?.maxKi ?? "-"}</TableCell>
                 <TableCell>
-                  {p?.url_image ? (
+                  {p?.image ? (
                     <img
                       src={p.image}
                       alt={p?.name ?? "personaje"}
