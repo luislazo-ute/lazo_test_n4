@@ -22,7 +22,7 @@ export default function App() {
       <AppBar position="static" sx={{ bgcolor: "#343a40" }}>
         <Toolbar sx={{ gap: 1 }}>
           <Typography variant="h6" sx={{ fontWeight: 800, mr: 2 }}>
-            Mi App Bootstrap
+          Gestión de Productos
           </Typography>
 
           <Button component={NavLink} to="/" end sx={linkBtnSx}>
